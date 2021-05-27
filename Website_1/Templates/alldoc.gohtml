@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
+        integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
+    <!-- Bootstrap CSS -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="public/CSS/home_style.css">
+    <title>Dashboard</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm fixed-top navbar-light">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a href="#" class="navbar-brand mr-auto"><img src="public/img/logo.png" alt="Health-e-Locker" height="35" width="60"><span class="text-white"> Health-E-Locker</span></a>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <nav class="navbar-nav">
+                    <a href="#" class="nav-link text-white">Dashboard</a>
+                    <a href="/blog" class="nav-link text-white">Blog</a>
+                    <a href="/contactus" class="nav-link text-white">Contact us</a>
+                    <a href="/logout"><button class="btn btn-dark m-auto" type="button">Logout</button></a>
+                </nav>
+            </div>
+        </div>
+    </nav>
+    <header class="jumbotron container-fluid">
+        <div class="container align-self-center">
+           <h1> All Document Detail </h1>
+        </div>
+    </header>
+
+    {{if .Hospitals }}
+        <div class="container mt-5 mb-5">
+            <div>
+                <div class="modal-header float-left">
+                    <h5>Hospital details</h5>
+                </div>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Reason</th>
+                            <th scope="col">Admission Date</th>
+                            <th scope="col">Discharged Date</th>
+                            <th scope="col">Notes</th>
+                            <th scope="col">File Name</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {{range  $i, $hospital :=  .Hospitals }}
+                            <tr>
+                                <th scope="row">{{$hospital.Id}}</th>
+                                <td>{{$hospital.Hospital}}</td>
+                                <td>{{$hospital.Reason}}</td>
+                                <td>{{$hospital.AdmissionDate}}</td>
+                                <td>{{$hospital.DischargedDate}}</td>
+                                <td>{{$hospital.Note}}</td>
+                                <td>{{$hospital.FileName}}</td>
+                            </tr>
+                        {{end}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    {{end}}
+
+
+    {{if .Immus }}
+        <div class="container mt-5 mb-5">
+            <div>
+                <div class="modal-header float-left">
+                    <h5>Immus details</h5>
+                </div>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Vaccine</th>
+                            <th scope="col">Protection</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Note</th>
+                            <th scope="col">File Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{range $i, $immu := .Immus }}
+                            <tr>
+                                <th scope="row">{{$immu.Id}}</th>
+                                <td>{{$immu.Vaccine}}</td>
+                                <td>{{$immu.Protection}}</td>
+                                <td>{{$immu.Date}}</td>
+                                <td>{{$immu.Note}}</td>
+                                <td><a href="/immu/download?id={{$immu.Id}}">{{$immu.FileName}}</a></td>
+                            </tr>
+                        {{end}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    
+    {{end}}
+
+    {{if .Medications }}
+        <div class="container mt-5 mb-5">
+            <div>
+                <div class="modal-header float-left">
+                    <h5>Medications details</h5>
+                </div>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Medication</th>
+                            <th scope="col">Dose Info</th>
+                            <th scope="col">Reason</th>
+                            <th scope="col">Prescribe Date</th>
+                            <th scope="col">Finish Date</th>
+                            <th scope="col">Note</th>
+                            <th scope="col">File Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    
+                        {{range $i, $medicationData := .Medications }}
+                            <tr>
+                                <th scope="row">{{$i}}</th>
+                                <td>{{$medicationData.Medication}}</td>
+                                <td>{{$medicationData.DoseInfo}}</td>
+                                <td>{{$medicationData.Reason}}</td>
+                                <td>{{$medicationData.PrescribeDate}}</td>
+                                <td>{{$medicationData.FinishDate}}</td>
+                                <td>{{$medicationData.Note}}</td>
+                                <td>{{$medicationData.FileName}}</td>
+                            </tr>
+                        {{end}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    {{end}}
+
+
+    {{if .Symptoms }}
+        <div class="container mt-5 mb-5">
+            <div>
+                <div class="modal-header float-left">
+                    <h5>Symptoms details</h5>
+                </div>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Symptoms</th>
+                            <th scope="col">Severity</th>
+                            <th scope="col">Context</th>
+                            <th scope="col">Symptom Duration</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Note</th>
+                            <th scope="col">File Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    
+                        {{range $i, $symptomData := .Symptoms }}
+                            <tr>
+                                <th scope="row">{{$symptomData.Id}}</th>
+                                <td>{{$symptomData.Symptom}}</td>
+                                <td>{{$symptomData.Severity}}</td>
+                                <td>{{$symptomData.Context}}</td>
+                                <td>{{$symptomData.SymptomDuration}}</td>
+                                <td>{{$symptomData.Date}}</td>
+                                <td>{{$symptomData.Note}}</td>
+                                <td>{{$symptomData.FileName}}</td>
+                            </tr>
+                        {{end}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    {{end}}
+
+
+    {{if .Allegry }}
+        <div class="container mt-5 mb-5">
+            <div>
+                <div class="modal-header float-left">
+                    <h5>Allegry details</h5>
+                </div>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Allergen</th>
+                            <th scope="col">Reaction</th>
+                            <th scope="col">Severity</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Note</th>
+                            <th scope="col">File Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    
+                        {{range $i, $alleryData := .Allegry }}
+                            <tr>
+                                <th scope="row">{{$alleryData.Id}}</th>
+                                <td>{{$alleryData.Allergen}}</td>
+                                <td>{{$alleryData.Reaction}}</td>
+                                <td>{{$alleryData.Severity}}</td>
+                                <td>{{$alleryData.Date}}</td>
+                                <td>{{$alleryData.Note}}</td>
+                                <td>{{$alleryData.FileName}}</td>
+                            </tr>
+                        {{end}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    {{end}}
+</body>
+</html>
