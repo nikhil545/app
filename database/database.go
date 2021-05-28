@@ -5,8 +5,7 @@ import (
 	"fmt"
 )
 
-
-//to get the value os.Getenv("host"), run 'export host=localhost'
+//learning ===== to get the value os.Getenv("host"), run 'export host=localhost'
 const (
 	host     = "hpe.c5p6cfuydxbj.us-east-1.rds.amazonaws.com"
 	port     = 5432
@@ -16,7 +15,7 @@ const (
 )
 
 func StartDatabase() *sql.DB {
-	
+
 	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+
 		"password=%s dbname=%s sslmode=disable",
 		host, port, user, password, dbname)

@@ -32,7 +32,7 @@ func AddHospital(w http.ResponseWriter, r *http.Request) {
 
 func AddHospitalProcess(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "POST" {
-	
+
 		file, handler, err := r.FormFile("file")
 		if err != nil {
 			fmt.Println("Error Retrieving the File: ", err)

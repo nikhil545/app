@@ -5,10 +5,10 @@ import (
 	"Website_1/router"
 	"Website_1/service"
 	"encoding/gob"
-	//"bufio"
-	"text/template"
 
+	//"bufio"
 	"Website_1/util"
+	"text/template"
 
 	"github.com/gorilla/sessions"
 	_ "github.com/lib/pq"
@@ -43,6 +43,5 @@ func main() {
 	}()
 
 	router.HttpEndpoint()
-
 
 }

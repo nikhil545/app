@@ -33,7 +33,7 @@ func HttpEndpoint() {
 	http.HandleFunc("/login", service.Login)
 	http.HandleFunc("/logout", service.Logout)
 	http.HandleFunc("/tutorial", tutorial)
-	http.ListenAndServe(":4000", nil)
+	http.ListenAndServe(":5050", nil)
 }
 
 func index(w http.ResponseWriter, r *http.Request) {
@@ -43,10 +43,9 @@ func index(w http.ResponseWriter, r *http.Request) {
 
 func dashboard(w http.ResponseWriter, r *http.Request) {
 	user, err := service.GetUserSession(r)
-	if err != nil ||  !user.Authenticated {
+	if err != nil || !user.Authenticated {
 		http.Redirect(w, r, "/login", 301)
 	}
-
 
 	err = util.Tpl.ExecuteTemplate(w, "dashboard.gohtml", user)
 	fmt.Println(err)
